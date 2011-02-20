@@ -7,9 +7,15 @@ import sys
 import pygtk
 pygtk.require('2.0')
 import gtk
+
 import vte
 
 from configobj import ConfigObj
+
+try:
+    import gtkmozembed
+except:
+    print "You dont'have python-webkitgtk installed!"
 
 basepath = os.path.abspath(os.path.dirname(sys.argv[0]))
 
@@ -125,7 +131,7 @@ class PySteg:
                            'No Stego file specified')
             return 0
         else:
-            stegFile = ' -sf "' + self.stegfile.get_text() + '"'
+            stegFile = ' -sf "%s"' % self.stegfile.get_text()
 
         # Check if extract file should be used
         if(self.outputfile.get_sensitive()):
@@ -146,10 +152,9 @@ class PySteg:
         else:
             passPhrase = " -p " + self.passfrase.get_text()
 
-        path = os.path.dirname(stegFile)
-        self.terminal.feed_child("cd " + path + "\n")
-        self.terminal.feed_child("clear \n")
-        self.tabs.set_current_page(2)
+        gopath = os.path.dirname(self.stegfile.get_text())
+        self.terminal.feed_child("cd %s\n" % gopath)
+        self.terminal.feed_child("clear\n")
         self.terminal.feed_child("steghide extract" + stegFile + outFile + passPhrase + "\n")
 
     def __init__(self):
@@ -232,6 +237,27 @@ class PySteg:
         self.quitapp = builder.get_object('button6')
         self.quitapp.connect('clicked', self.confirm_exit)
 
+        self.help_dialog = builder.get_object('helpdialog');
+        self.sw = builder.get_object('scrolledwindow1')
+        self.help_dialog.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+        self.webview = gtkmozembed.MozEmbed()
+        self.webview.load_url("file://"+basepath+"/help/index.html")
+        self.sw.add_with_viewport(self.webview)
+
+        self.helpembbtn = builder.get_object('help-embed')
+        self.helpembbtn.connect('clicked', self.show_embed_help)
+        self.helpextbtn = builder.get_object('help-extract')
+        self.helpextbtn.connect('clicked', self.show_extract_help)
+        self.helpffmbtn = builder.get_object('help-fileformats')
+        self.helpffmbtn.connect('clicked', self.show_formats_help)
+        self.helptrmbtn = builder.get_object('help-terminal')
+        self.helptrmbtn.connect('clicked', self.show_terminal_help)
+
+
+
+    def close_help(self, bitton, data=None):
+        self.help_dialog.destroy()
+
     def select_file(self, button):
         openfile = gtk.FileChooserDialog("Select Stego file:", None,
                                         gtk.FILE_CHOOSER_ACTION_OPEN,
@@ -275,7 +301,22 @@ class PySteg:
 
 
     def show_help(self, button):
-        print "Shoing the homepage"
+        self.help_dialog.show_all()
+        response = self.help_dialog.run()
+        self.webview.load_url("file://"+basepath+"/help/index.html")
+        self.help_dialog.hide()
+
+    def show_embed_help(self, button):
+        self.webview.load_url("file://"+basepath+"/help/embed.html")
+
+    def show_extract_help(self, button):
+        self.webview.load_url("file://"+basepath+"/help/extract.html")
+
+    def show_formats_help(self, button):
+        self.webview.load_url("file://"+basepath+"/help/formats.html")
+
+    def show_terminal_help(self, button):
+        self.webview.load_url("file://"+basepath+"/help/terminal.html")
 
     def confirm_exit(self, button):
         quitd = gtk.MessageDialog(None,
