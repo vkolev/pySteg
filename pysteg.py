@@ -159,7 +159,7 @@ class PySteg:
 
     def __init__(self):
         self.window = builder.get_object('window1')
-        self.window.set_property('height-request', 300)
+        self.window.set_property('height-request', 320)
         self.window.connect('destroy', self.on_window_destroy)
         self.tabs = builder.get_object('notebook1')
         self.terminal = builder.get_object('terminal1')

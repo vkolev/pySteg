@@ -6,7 +6,7 @@
   <object class="GtkWindow" id="window1">
     <property name="visible">True</property>
     <property name="tooltip_markup">pySteg</property>
-    <property name="title" translatable="yes">PySteg 1.0 (beta)</property>
+    <property name="title" translatable="yes">PySteg 1.1</property>
     <property name="resizable">False</property>
     <property name="window_position">center-always</property>
     <property name="icon">pySteg.png</property>
@@ -698,16 +698,18 @@
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">&lt;b&gt;pySteg&lt;/b&gt;
 
-This is a simpel frontend for the steghide command-line tol.
+This is a simple frontend for the steghide command-line tool.
 This application is written in pure Python/PyGTK.
 
 The forntend is inspired from the steghideui for windows - written in C#.
 
 Programming: Vladimir Kolev
-Website: http://www.bultux.org
-Development: http://code.google.com/p/pysteg/
+Website: http://www.vladimirkolev.com
+Development: https://github.com/vkolev/pySteg/
 
-License: MIT LIcense http://www.opensource.org/licenses/mit-license.php</property>
+License: MIT LIcense http://www.opensource.org/licenses/mit-license.php
+The pySteg icon is part of the gnome-icon-theme and is licensed under the
+GNU GPL v.2 License</property>
                     <property name="use_markup">True</property>
                     <property name="justify">fill</property>
                     <property name="selectable">True</property>
