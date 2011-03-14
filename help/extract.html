@@ -9,6 +9,7 @@
 /* <![CDATA[ */
     html {
         background: #D9D9D9;
+        font-size: 12px;
     }
     
     h2, h3 {
@@ -24,7 +25,13 @@
 <h3>Extracting with pySteg</h3>
 
 <p>
-To embed a file you need to consider following...
+Extracting a file assumes that you have a file containing a hidden data and you know the passphrase to extract the
+ secret data.
+ <ul>
+ <li><strong>Stego file</strong> - the file containing the hidden data</li>
+ <li><strong>Output file</strong> - the file the data will be saved to, if the file was hidden using the option "No Original File Name".</li>
+ <li><strong>Pass</strong> - The Passphrase used to hide the data.</li>
+ </ul>
 </p>
 
 </div>

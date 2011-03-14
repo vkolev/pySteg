@@ -9,6 +9,7 @@
 /* <![CDATA[ */
     html {
         background: #D9D9D9;
+        font-size: 12px;
     }
     
     h2, h3 {
@@ -29,10 +30,24 @@
 <p>
 Embeding a file has a various options, but the important ones are:
 <ul>
+    <h4>Files...</h4>
 <li><strong>Coverfile</strong> - The file that will store the important data <em>(see suported file formats)</em></li>
 <li><strong>Embed file</strong> - The file that will be hidden in the Coverfile - it can be in any format, but you have to consider,
 the filesize before embedding it in the coverfile.</li>
-<li></li>
+<li><strong>* Use Cover file</strong> - That means the the no new file will be created, if disabled, a new filename must be entered.</li>
+    <h4>Encryption...</h4>
+<li><strong>Type</strong> - The type of the encryption. Default is rejindael-128</li> 
+<li><strong>Mode</strong> - The mode to be used for the encryption</li>
+<li><strong>Pass</strong> - The passphrase to be used for decrypting</li>
+    <h4>Compression...</h4>
+<li><strong>Do not compress</strong> - Doesn't compress the secret data before encryption. If disabled see the Compression level</li>
+    <h4>Other Options...</h4>
+<li><strong>No CRC32 Checksum</strong> - You can use this  if
+              the  secret  data  already  contains  some  type of
+              checksum or if you do not want to embed those extra
+              32 bits needed for the checksum.</li> 
+<li><strong>No Original File Name</strong> - Do  not  embed the file name of the secret file. If enabled then in the extrator you have to specify a
+filename to save the secret data.</li>
 </ul>
 </p>
 
